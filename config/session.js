@@ -1,14 +1,9 @@
+const { PrismaSessionStore } = require('@quixo3/prisma-session-store');
 const passport = require('./passport')
 const session = require('express-session');
-const pool = require('../db/pool')
-const pgSession = require('connect-pg-simple')(session);
+const prisma = require('./path/to/prisma')
 
 function setupSession(app) {
-    const sessionStore = new pgSession({
-        pool: pool,
-        tableName: 'sessions',
-        createTableIfMissing: true
-    })
     const secret = process.env.SESSION_SECRET
     if (!secret) {
         throw new Error('SESSION_SECRET environment variable is required');
@@ -18,7 +13,16 @@ function setupSession(app) {
         secret: secret, 
         resave: false, 
         saveUninitialized: false,
-        store: sessionStore,
+        cookie: {
+            maxAge: 7 * 24 * 60 * 60 * 1000
+        },
+        store: new PrismaSessionStore(
+            prisma,
+            {
+                checkPeriod: 10 * 60 * 1000,
+                dbRecordIdIsSessionId: true
+            }
+    ),
     }));
     app.use(passport.session());
 }
