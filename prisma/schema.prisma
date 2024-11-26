@@ -20,27 +20,62 @@ model Session {
   expiresAt   DateTime
 }
 
+model Folder {
+  id                 Int      @id @default(autoincrement())
+  name               String
+  isRoot             Boolean   @default(false)
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  // folders
+  parentFolder       Folder?   @relation("FolderToFolder", fields: [parentFolderId], references: [id], onDelete: Cascade)
+  parentFolderId     Int?
+  childrenFolders    Folder[]  @relation("FolderToFolder")
+
+  // files
+  files              File[]    @relation("FolderToFile")
+
+  // user
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId             Int
+
+  @@index([userId])
+  @@index([parentFolderId])
+}
+
 model File {
-  id          Int      @id @default(autoincrement())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  title       String   @db.VarChar(255)
-  content     Bytes?
-  mimeType    String
-  extension   String
-  size        Int
-  filename    String
-  user        User     @relation(fields: [userId], references: [id])
-  userId      Int
+  id                Int      @id @default(autoincrement())
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  title             String   @db.VarChar(255)
+  content           Bytes?
+  mimeType          String
+  extension         String
+  size              Int
+  filename          String
+
+  // user
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId            Int
+
+  // folder
+  folder      Folder   @relation("FolderToFile", fields: [folderId], references: [id], onDelete: Cascade)
+  folderId    Int?
+
+  @@index([userId])
+  @@index([folderId])
 }
 
 model User {
   id        Int      @id @default(autoincrement())
   email     String   @unique
   name      String
-  username  String
+  username  String   @unique
   password  String
   files     File[]
+  folders   Folder[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([email])
 }
