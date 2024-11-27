@@ -1,7 +1,7 @@
 const { PrismaSessionStore } = require('@quixo3/prisma-session-store');
 const passport = require('./passport')
 const session = require('express-session');
-const prisma = require('./path/to/prisma')
+const prisma = require('../prisma/prismaClient')
 
 function setupSession(app) {
     const secret = process.env.SESSION_SECRET
