@@ -60,7 +60,7 @@ model File {
 
   // folder
   folder      Folder   @relation("FolderToFile", fields: [folderId], references: [id], onDelete: Cascade)
-  folderId    Int?
+  folderId    Int
 
   @@index([userId])
   @@index([folderId])
