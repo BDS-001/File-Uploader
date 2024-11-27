@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container">
+    <% if (locals.currentUser) {%>
+      <h1>WELCOME BACK <%= currentUser.username %></h1>
+    <% } else { %>
+      <h1>Not Logged In%></h1>
+    <%}%>
+  </main>
+</body>
+</html>
