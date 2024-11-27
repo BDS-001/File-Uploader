@@ -1,0 +1,12 @@
+<header class="main-header">
+  <div class="container">
+      <h1>File Uploader</h1>
+      <nav>
+          <% if (locals.currentUser) {%>
+              <a href="/log-out">LOG OUT</a>
+          <% } else { %>
+              <a href="/login">login/sign up</a>
+          <%}%>
+      </nav>
+  </div>
+</header>

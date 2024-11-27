@@ -7,6 +7,7 @@
 </head>
 <body>
   <main class="container">
+    <%- include('partials/header') %>
     <% if (locals.currentUser) {%>
       <h1>WELCOME BACK <%= currentUser.username %></h1>
     <% } else { %>
