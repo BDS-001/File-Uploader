@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const passport = require('../config/passport')
 const userQueries = require('../prisma/userQueries')
 
-async function getHomepage(req, res) {
+async function getUserContent(req, res) {
     res.render("index")
 }
 
@@ -48,7 +48,7 @@ function getLogOut(req, res, next) {
 };
 
 module.exports = {
-    getHomepage,
+    getUserContent,
     getLogOut,
     getUserSignUp,
     postLogIn,

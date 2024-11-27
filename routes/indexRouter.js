@@ -2,7 +2,8 @@ const router = require("express").Router();
 const userController = require('../controllers/userController')
 const {requireAuthSignedIn} = require('../middleware/requireAuth')
 
-router.get("/", requireAuthSignedIn, userController.getHomepage);
+router.get("/", requireAuthSignedIn, userController.getUserContent);
+router.get('/folder/:id', requireAuthSignedIn, userController.getUserContent)
 
 router.get("/signup", userController.getUserSignUp);
 router.post("/signup", userController.postUserSignUp);

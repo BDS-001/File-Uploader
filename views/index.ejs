@@ -8,6 +8,10 @@
 <body>
   <main class="container">
     <%- include('partials/header') %>
+    <form action="/uploadFile" method="post" enctype="multipart/form-data">
+      <label for="file">Upload File</label>
+      <input type="file" name="avatar" />
+    </form>
     <% if (locals.currentUser) {%>
       <h1>WELCOME BACK <%= currentUser.username %></h1>
     <% } else { %>
