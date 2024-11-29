@@ -11,3 +11,7 @@ async function postUploadFile(req, res) {
         folder.root = true
     }
 }
+
+module.exports = {
+    postUploadFile
+}
