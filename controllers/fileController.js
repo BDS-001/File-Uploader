@@ -1,4 +1,4 @@
-const { getUserRootFolder } = require('../prisma/folderQueries')
+const { getUserRootFolder, uploadFile } = require('../prisma/folderQueries')
 
 async function postUploadFile(req, res) {
     const userId = req.user.id
@@ -10,6 +10,18 @@ async function postUploadFile(req, res) {
         folder.id = rootFolder.id
         folder.root = true
     }
+    const file = req.file.buffer
+    const fileData = {
+        title: req.file.originalname,          
+        filename: req.file.originalname,       
+        mimeType: req.file.mimetype,          
+        extension: path.extname(req.file.originalname),
+        size: req.file.size,                  
+        content: file,             
+        userId,               
+        folderId
+    }
+    await uploadFile(fileData)
 }
 
 module.exports = {

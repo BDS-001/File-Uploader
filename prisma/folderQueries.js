@@ -12,4 +12,8 @@ async function getUserRootFolder(userId) {
     })
 }
 
-module.exports = {getUserRootFolder}
+async function uploadFile(data) {
+    return prisma.file.create({data})
+}
+
+module.exports = {getUserRootFolder,uploadFile}
