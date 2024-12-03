@@ -1,4 +1,4 @@
-const { getUserRootFolder } = require('../prisma/folderQueries')
+const { getUserRootFolder, addFolder } = require('../prisma/folderQueries');
 
 async function postAddFolder(req, res, next) {
     const userId = req.user.id
