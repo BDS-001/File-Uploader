@@ -1,4 +1,5 @@
 const { getUserRootFolder, uploadFile } = require('../prisma/folderQueries')
+const path = require('path');
 
 async function postUploadFile(req, res, next) {
     if (!req.file) {
