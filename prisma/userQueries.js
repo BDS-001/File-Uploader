@@ -19,7 +19,7 @@ async function addUser({email, username, name, password}) {
             email: true,
             name: true,
             username: true,
-            createdAt: true
+            createdAt: true,
           }
     })
 }

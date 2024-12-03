@@ -1,7 +1,8 @@
 const prisma = require('./prismaClient')
 
 async function getUserRootFolder(userId) {
-    const folder = prisma.folder.findFirst({
+    userId = parseInt(userId)
+    const folder = await prisma.folder.findFirst({
         where: {
             isRoot: true,
             userId
@@ -10,6 +11,8 @@ async function getUserRootFolder(userId) {
             id: true
         }
     })
+
+    console.log(folder)
 
     return folder?.id
 }

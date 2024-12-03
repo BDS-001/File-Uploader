@@ -2,20 +2,23 @@ const { getUserRootFolder, addFolder } = require('../prisma/folderQueries');
 
 async function postAddFolder(req, res, next) {
     const userId = req.user.id
-    const parentFolderId = req.params.id ? parseInt(req.params.id) : await getUserRootFolder(userId);
-    const isRoot = `${parentFolderId}` === req.params.id
-    if (parentFolderId === null || parentFolderId === undefined) {
+    const rootFolderId = await getUserRootFolder(userId);
+    const parentFolderId = req.params.id ? parseInt(req.params.id) : rootFolderId;
+
+    if (!parentFolderId) {
         return res.status(404).json({ error: 'parent folder not found' });
     }
+
+    console.log(req.body.folderName)
     const folderData = {
-        name: req.body.folderName,                  
+        name: req.body.folderName,
         parentFolderId,
         userId
     }
 
     try {
         await addFolder(folderData)
-        return isRoot ? res.redirect('/') : res.redirect(`/folder/${parentFolderId}`)
+        return parentFolderId === rootFolderId ? res.redirect('/') : res.redirect(`/folder/${parentFolderId}`)
     } catch(err) {
         return next(err);
     }

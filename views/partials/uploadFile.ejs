@@ -1,4 +1,5 @@
-<form action="/uploadFile" method="post" enctype="multipart/form-data">
+<form action="/uploadFile/<%= parentFolderId %>" method="post" enctype="multipart/form-data">
     <label for="file">Upload File</label>
-    <input type="file" name="avatar" />
-</form>
+    <input type="file" name="file" />
+    <button type="submit">Submit</button>
+  </form>
