@@ -22,7 +22,7 @@ async function postUploadFile(req, res, next) {
         size: req.file.size,                  
         content: file,             
         userId,               
-        folderId
+        folderId: folder.id
     }
 
     try {

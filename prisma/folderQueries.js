@@ -1,7 +1,7 @@
 const prisma = require('./prismaClient')
 
 async function getUserRootFolder(userId) {
-    return prisma.folder.findFirst({
+    const folder = prisma.folder.findFirst({
         where: {
             isRoot: true,
             userId
@@ -10,10 +10,16 @@ async function getUserRootFolder(userId) {
             id: true
         }
     })
+
+    return folder?.id
 }
 
 async function uploadFile(data) {
     return prisma.file.create({data})
 }
 
-module.exports = {getUserRootFolder,uploadFile}
+async function addFolder(data) {
+    return prisma.folder.create({data})
+  }
+
+module.exports = {getUserRootFolder,uploadFile, addFolder}

@@ -3,7 +3,8 @@ const passport = require('../config/passport')
 const userQueries = require('../prisma/userQueries')
 
 async function getUserContent(req, res) {
-    res.render("index")
+    const parentFolderId = req.params.id || null
+    res.render("index", {parentFolderId})
 }
 
 function getLoginPage(req, res) {
