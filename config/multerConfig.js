@@ -8,6 +8,9 @@ const fileFilter = (req, file, cb) => {
     const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
     const mimetype = allowedTypes.test(file.mimetype);
 
+    if (file.size > 10 * 1024 * 1024) {
+        return cb(new Error('File too large'));
+      }
     if (mimetype && extname) {
         return cb(null, true);
     }
