@@ -23,6 +23,34 @@ async function uploadFile(data) {
 
 async function addFolder(data) {
     return prisma.folder.create({data})
-  }
+}
 
-module.exports = {getUserRootFolder,uploadFile, addFolder}
+async function getFolderContent(folderId) {
+    return prisma.folder.findUnique({
+        where: {
+            id: folderId
+        },
+        select: {
+            id: true,
+            name: true,
+            childrenFolders: {
+                select: {
+                    id: true,
+                    name: true,
+                    createdAt: true
+                }
+            },
+            files: {
+                select: {
+                    id: true,
+                    title: true,
+                    filename: true,
+                    mimeType: true,
+                    createdAt: true
+                }
+            }
+        }
+    })
+}
+
+module.exports = {getUserRootFolder,uploadFile, addFolder, getFolderContent}
