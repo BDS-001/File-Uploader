@@ -12,8 +12,6 @@ async function getUserRootFolder(userId) {
         }
     })
 
-    console.log(folder)
-
     return folder?.id
 }
 
@@ -26,6 +24,7 @@ async function addFolder(data) {
 }
 
 async function getFolderContent(folderId) {
+    console.log('folderId in query:', folderId, typeof folderId); // Debug log
     return prisma.folder.findUnique({
         where: {
             id: folderId

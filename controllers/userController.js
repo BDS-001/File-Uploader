@@ -1,10 +1,13 @@
 const bcrypt = require('bcryptjs');
 const passport = require('../config/passport')
 const userQueries = require('../prisma/userQueries')
+const folderQueries = require('../prisma/folderQueries')
 
 async function getUserContent(req, res) {
-    const currentFolder = req.currentFolder
-    res.render("index", {parentFolderId: currentFolder.id})
+  console.log('currentFolder in controller:', req.currentFolder); // Debug log
+  const folderContent = await folderQueries.getFolderContent(req.currentFolder.id);
+  console.log('folderContent:', folderContent); // Debug log
+  res.render("index", {parentFolderId: req.currentFolder.id, folderContent});
 }
 
 function getLoginPage(req, res) {

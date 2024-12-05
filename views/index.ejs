@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title></title>
-  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main class="container">
@@ -14,8 +13,43 @@
     <% if (locals.currentUser) {%>
       <h1>WELCOME BACK <%= currentUser.username %></h1>
     <% } else { %>
-      <h1>Not Logged In%></h1>
+      <h1>Not Logged In</h1>
     <%}%>
+
+    <% if (folderContent) { %>
+      <% if (folderContent.name) { %>
+        <h2>Current Folder: <%= folderContent.name %></h2>
+      <% } %>
+      
+      <div class="folder-contents">
+        <% if (folderContent.childrenFolders && folderContent.childrenFolders.length > 0) { %>
+          <div class="folders">
+            <% folderContent.childrenFolders.forEach(folder => { %>
+              <div class="folder-item">
+                <a href="/folder/<%= folder.id %>">
+                  <%= folder.name %> [Folder]
+                </a>
+              </div>
+            <% }) %>
+          </div>
+        <% } %>
+
+        <% if (folderContent.files && folderContent.files.length > 0) { %>
+          <div class="files">
+            <% folderContent.files.forEach(file => { %>
+              <div class="file-item">
+                <%= file.title %> [File]
+              </div>
+            <% }) %>
+          </div>
+        <% } %>
+
+        <% if ((!folderContent.childrenFolders || folderContent.childrenFolders.length === 0) && 
+               (!folderContent.files || folderContent.files.length === 0)) { %>
+          <p>This folder is empty</p>
+        <% } %>
+      </div>
+    <% } %>
   </main>
 </body>
 </html>
