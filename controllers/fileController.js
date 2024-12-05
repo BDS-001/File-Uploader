@@ -1,4 +1,4 @@
-const { getUserRootFolder, uploadFile } = require('../prisma/folderQueries')
+const { uploadFile } = require('../prisma/folderQueries')
 const path = require('path');
 
 async function postUploadFile(req, res, next) {
@@ -6,14 +6,11 @@ async function postUploadFile(req, res, next) {
         return res.status(400).json({ error: 'No file uploaded' });
     }
     const userId = req.user.id
-    const folderId = req.params.id ? parseInt(req.params.id) : null;
-
-    const folder = {id:folderId, root:false}
-    if (folder.id === null) {
-        const rootFolder = await getUserRootFolder(userId)
-        folder.id = rootFolder.id
-        folder.root = true
+    const currentFolderId = req.currentFolder.id
+    if (!currentFolderId && currentFolderId !== 0) {
+        return res.status(400).json({ error: 'No parent folder detected' });
     }
+    
     const file = req.file.buffer
     const fileData = {
         title: req.file.originalname,          
@@ -23,12 +20,12 @@ async function postUploadFile(req, res, next) {
         size: req.file.size,                  
         content: file,             
         userId,               
-        folderId: folder.id
+        folderId: currentFolderId
     }
 
     try {
         await uploadFile(fileData)
-        return folder.root ? res.redirect('/') : res.redirect(`/folder/${folder.id}`)
+        return req.currentFolder.root ? res.redirect('/') : res.redirect(`/folder/${currentFolderId}`)
     } catch(err) {
         return next(err);
     }
