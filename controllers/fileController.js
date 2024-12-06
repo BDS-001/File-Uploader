@@ -1,4 +1,5 @@
 const { uploadFile } = require('../prisma/folderQueries')
+const { getFileData } = require('../prisma/fileQueries')
 const path = require('path');
 
 async function postUploadFile(req, res, next) {
@@ -31,6 +32,25 @@ async function postUploadFile(req, res, next) {
     }
 }
 
+async function getFileDetails(req, res, next) {
+    const userId = req.user.id
+    let fileId = req.params.id
+    if(!fileId) {
+        return res.status(400).json({ error: 'No file id' });
+    }
+    fileId = parseInt(fileId)
+
+    try {
+        const fileData = await getFileData(fileId)
+        if (fileData.userId !== userId) return res.status(400).json({ error: 'No file id' });
+        return res.render('fileDetails', { file: fileData })
+        
+    } catch (error) {
+        next(error)
+    }
+}
+
 module.exports = {
-    postUploadFile
+    postUploadFile,
+    getFileDetails
 }

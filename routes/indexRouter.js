@@ -14,6 +14,8 @@ router.post('/uploadFile/', requireAuthSignedIn, getCurrentFolder, upload.single
 router.post('/newFolder/:id', requireAuthSignedIn, getCurrentFolder, folderController.postAddFolder)
 router.post('/newFolder', requireAuthSignedIn, getCurrentFolder, folderController.postAddFolder)
 
+router.get('/fileDetails/:id', requireAuthSignedIn, fileController.getFileDetails)
+
 router.get("/signup", userController.getUserSignUp);
 router.post("/signup", userController.postUserSignUp);
 

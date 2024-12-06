@@ -38,7 +38,9 @@
           <div class="files">
             <% folderContent.files.forEach(file => { %>
               <div class="file-item">
+                <a href="/fileDetails/<%= file.id %>">
                 <%= file.title %> [File]
+              </a>
               </div>
             <% }) %>
           </div>
