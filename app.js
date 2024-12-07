@@ -12,6 +12,7 @@ const indexRouter = require('./routes/indexRouter');
 // --- View Engine Setup ---
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+app.use(express.static('public'));
 
 
 // --- Middleware Setup ---
