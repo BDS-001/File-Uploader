@@ -1,152 +1,219 @@
 /* Basic reset and container */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: system-ui, -apple-system, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f5f5f5;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f5f5f5;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Typography */
+h1 {
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+  font-size: 2rem;
+}
+
+h2 {
+  margin: 1rem 0;
+  color: #34495e;
+  font-size: 1.5rem;
+}
+
+/* Forms */
+form {
+  max-width: 400px;
+  margin: 0 auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+form div {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+/* Download Button Specific Styles */
+.download-btn {
+  width: auto;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  background-color: #27ae60;
+  transition: background-color 0.3s ease;
+}
+
+.download-btn:hover {
+  background-color: #219a52;
+}
+
+.download-btn:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
+/* Download Status */
+#downloadStatus {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.download-success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.download-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.download-progress {
+  background-color: #cce5ff;
+  color: #004085;
+  border: 1px solid #b8daff;
+}
+
+/* Links */
+a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* File Details Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  margin: 1rem 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+
+/* Folder Structure */
+.folder-contents {
+  margin-top: 2rem;
+}
+
+.folders, .files {
+  margin: 1rem 0;
+}
+
+.folder-item, .file-item {
+  background: white;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Loading Spinner for Download */
+.loading-spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.5rem;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
   .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
+      padding: 1rem;
   }
   
-  /* Typography */
   h1 {
-    margin-bottom: 1.5rem;
-    color: #2c3e50;
-    font-size: 2rem;
+      font-size: 1.75rem;
   }
   
-  h2 {
-    margin: 1rem 0;
-    color: #34495e;
-    font-size: 1.5rem;
-  }
-  
-  /* Forms */
-  form {
-    max-width: 400px;
-    margin: 0 auto;
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  form div {
-    margin-bottom: 1rem;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-  }
-  
-  input {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-  }
-  
-  button {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    margin-top: 1rem;
-  }
-  
-  button:hover {
-    background-color: #2980b9;
-  }
-  
-  /* Links */
-  a {
-    color: #3498db;
-    text-decoration: none;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
-  
-  /* File Details Table */
   table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-    margin: 1rem 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      font-size: 0.9rem;
   }
   
+  form {
+      padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
   th, td {
-    padding: 0.75rem;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  th {
-    background-color: #f8f9fa;
-    font-weight: 600;
-  }
-  
-  /* Folder Structure */
-  .folder-contents {
-    margin-top: 2rem;
-  }
-  
-  .folders, .files {
-    margin: 1rem 0;
+      padding: 0.5rem;
   }
   
   .folder-item, .file-item {
-    background: white;
-    padding: 0.75rem;
-    margin-bottom: 0.5rem;
-    border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      padding: 0.5rem;
   }
   
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .container {
-      padding: 1rem;
-    }
-  
-    h1 {
-      font-size: 1.75rem;
-    }
-  
-    table {
+  .download-btn {
+      padding: 0.4rem 0.8rem;
       font-size: 0.9rem;
-    }
-  
-    form {
-      padding: 1rem;
-    }
   }
-  
-  @media (max-width: 480px) {
-    th, td {
-      padding: 0.5rem;
-    }
-  
-    .folder-item, .file-item {
-      padding: 0.5rem;
-    }
-  }
+}
