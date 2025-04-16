@@ -2,24 +2,40 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title></title>
+  <title>File Uploader</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+  <%- include('partials/header') %>
+  
   <main class="container">
-    <%- include('partials/header') %>
-    <%- include('partials/uploadFile') %>
-    <%- include('partials/newFolder') %>
+    <% if (locals.currentUser) {%>
+      <div class="welcome-message">
+        <h2>Welcome, <%= currentUser.username %>!</h2>
+      </div>
+    <% } else { %>
+      <h1>Please log in to continue</h1>
+    <%}%>
 
     <% if (locals.currentUser) {%>
-      <h1>WELCOME BACK <%= currentUser.username %></h1>
-    <% } else { %>
-      <h1>Not Logged In</h1>
-    <%}%>
+      <div class="form-section">
+        <div>
+          <h2>Upload File</h2>
+          <%- include('partials/uploadFile') %>
+        </div>
+        
+        <div>
+          <h2>Create New Folder</h2>
+          <%- include('partials/newFolder') %>
+        </div>
+      </div>
+    <% } %>
 
     <% if (folderContent) { %>
       <% if (folderContent.name) { %>
         <h2>Current Folder: <%= folderContent.name %></h2>
+      <% } else { %>
+        <h2>Root Directory</h2>
       <% } %>
       
       <div class="folder-contents">
@@ -28,7 +44,7 @@
             <% folderContent.childrenFolders.forEach(folder => { %>
               <div class="folder-item">
                 <a href="/folder/<%= folder.id %>">
-                  <%= folder.name %> [Folder]
+                  📁 <%= folder.name %>
                 </a>
               </div>
             <% }) %>
@@ -40,8 +56,8 @@
             <% folderContent.files.forEach(file => { %>
               <div class="file-item">
                 <a href="/fileDetails/<%= file.id %>">
-                <%= file.title %> [File]
-              </a>
+                  📄 <%= file.title %>
+                </a>
               </div>
             <% }) %>
           </div>

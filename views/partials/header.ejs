@@ -1,12 +1,13 @@
 <header class="main-header">
-  <div class="container">
-      <h1>File Uploader</h1>
-      <nav>
-          <% if (locals.currentUser) {%>
-              <a href="/log-out">LOG OUT</a>
-          <% } else { %>
-              <a href="/login">login/sign up</a>
-          <%}%>
-      </nav>
-  </div>
-</header>
+    <div class="container">
+        <h1>File Uploader</h1>
+        <nav>
+            <% if (locals.currentUser) {%>
+                <a href="/">Home</a>
+                <a href="/log-out">LOG OUT</a>
+            <% } else { %>
+                <a href="/login">Login/Sign Up</a>
+            <%}%>
+        </nav>
+    </div>
+  </header>

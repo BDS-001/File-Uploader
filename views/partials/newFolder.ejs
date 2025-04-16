@@ -1,5 +1,7 @@
 <form action="/newFolder/<%= parentFolderId %>" method="post">
+  <div>
     <label for="folderName">Folder Name</label>
-    <input type="text" name="folderName" required />
-    <button type="submit">Submit</button>
-  </form>
+    <input type="text" name="folderName" id="folderName" placeholder="Enter folder name" required />
+  </div>
+  <button type="submit">Create Folder</button>
+</form>

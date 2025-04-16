@@ -31,14 +31,70 @@ h2 {
   font-size: 1.5rem;
 }
 
+/* Header Styling */
+.main-header {
+  background-color: #3498db;
+  color: white;
+  padding: 1rem 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.main-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+.main-header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: white;
+}
+
+.main-header nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.main-header nav a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  text-decoration: none;
+}
+
 /* Forms */
 form {
   max-width: 400px;
-  margin: 0 auto;
+  margin: 0 auto 2rem auto;
   background: white;
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Upload and New Folder Forms */
+.form-section {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.form-section form {
+  flex: 1;
+  margin: 0;
+  min-width: 0;
+}
+
+.form-section h2 {
+  margin-top: 0;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #2c3e50;
 }
 
 form div {
@@ -49,6 +105,7 @@ label {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 500;
+  color: #444;
 }
 
 input {
@@ -57,6 +114,10 @@ input {
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 1rem;
+}
+
+input[type="file"] {
+  padding: 0.5rem 0;
 }
 
 button {
@@ -69,6 +130,7 @@ button {
   font-size: 1rem;
   cursor: pointer;
   margin-top: 1rem;
+  transition: background-color 0.3s;
 }
 
 button:hover {
@@ -137,6 +199,8 @@ table {
   background: white;
   margin: 1rem 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 th, td {
@@ -161,10 +225,25 @@ th {
 
 .folder-item, .file-item {
   background: white;
-  padding: 0.75rem;
+  padding: 0.75rem 1rem;
   margin-bottom: 0.5rem;
   border-radius: 4px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.folder-item:hover, .file-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.folder-item a, .file-item a {
+  display: block;
+  text-decoration: none;
+}
+
+.folder-item a:hover, .file-item a:hover {
+  text-decoration: none;
 }
 
 /* Loading Spinner for Download */
@@ -184,36 +263,53 @@ th {
   100% { transform: rotate(360deg); }
 }
 
+.welcome-message {
+  background-color: #f1f9ff;
+  border-left: 4px solid #3498db;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border-radius: 0 4px 4px 0;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .container {
-      padding: 1rem;
+    padding: 1rem;
+  }
+  
+  .main-header .container {
+    padding: 0 1rem;
   }
   
   h1 {
-      font-size: 1.75rem;
+    font-size: 1.75rem;
   }
   
   table {
-      font-size: 0.9rem;
+    font-size: 0.9rem;
   }
   
   form {
-      padding: 1rem;
+    padding: 1rem;
+  }
+  
+  .form-section {
+    flex-direction: column;
+    gap: 1rem;
   }
 }
 
 @media (max-width: 480px) {
   th, td {
-      padding: 0.5rem;
+    padding: 0.5rem;
   }
   
   .folder-item, .file-item {
-      padding: 0.5rem;
+    padding: 0.5rem;
   }
   
   .download-btn {
-      padding: 0.4rem 0.8rem;
-      font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
   }
 }
